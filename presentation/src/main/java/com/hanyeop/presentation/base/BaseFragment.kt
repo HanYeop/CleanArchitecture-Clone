@@ -13,21 +13,21 @@ import androidx.fragment.app.Fragment
 abstract class BaseFragment<B : ViewDataBinding>(
     @LayoutRes val layoutId: Int
 ) : Fragment() {
-    lateinit var binding: B
+    private var _binding: B? = null
+    protected val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        _binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         init()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // ?
         binding.lifecycleOwner = viewLifecycleOwner
     }
 
@@ -38,4 +38,9 @@ abstract class BaseFragment<B : ViewDataBinding>(
 
     protected fun longShowToast(msg: String) =
         Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
