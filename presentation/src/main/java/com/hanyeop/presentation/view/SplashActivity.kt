@@ -1,12 +1,11 @@
 package com.hanyeop.presentation.view
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.hanyeop.presentation.R
+import com.hanyeop.presentation.databinding.ActivitySplashBinding
+import com.pss.presentation.base.BaseActivity
 
-class SplashActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
+    override fun init() {
+
     }
 }

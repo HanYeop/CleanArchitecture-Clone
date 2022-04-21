@@ -1,12 +1,11 @@
 package com.hanyeop.presentation.view
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.hanyeop.presentation.R
+import com.hanyeop.presentation.databinding.ActivityMainBinding
+import com.pss.presentation.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+    override fun init() {
+
     }
 }
