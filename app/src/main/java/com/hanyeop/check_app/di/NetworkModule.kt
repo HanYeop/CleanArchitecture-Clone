@@ -1,7 +1,6 @@
 package com.hanyeop.check_app.di
 
-import com.pss.check_percentage.utils.Utils.BASE_URL
-import com.pss.data.remote.api.LoveCalculatorApi
+import com.hanyeop.check_app.utils.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
