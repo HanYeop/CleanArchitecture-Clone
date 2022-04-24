@@ -1,6 +1,7 @@
 package com.hanyeop.check_app.di
 
 import com.hanyeop.check_app.utils.BASE_URL
+import com.hanyeop.data.remote.api.LoveCalculatorApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -50,12 +51,12 @@ object NetworkModule {
             .build()
     }
 
-//    @Provides
-//    @Singleton
-//    //LoveCalculatorApi interface 의존성 주입
-//    fun provideLoveCalculatorApiService(retrofit: Retrofit): LoveCalculatorApi {
-//        return retrofit.create(LoveCalculatorApi::class.java)
-//    }
+    @Provides
+    @Singleton
+    //LoveCalculatorApi interface 의존성 주입
+    fun provideLoveCalculatorApiService(retrofit: Retrofit): LoveCalculatorApi {
+        return retrofit.create(LoveCalculatorApi::class.java)
+    }
 
     private fun getLoggingInterceptor(): HttpLoggingInterceptor =
         HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
