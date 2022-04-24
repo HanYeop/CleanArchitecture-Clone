@@ -3,8 +3,6 @@ package com.hanyeop.data.utils.base
 import android.util.Log
 import com.hanyeop.domain.utils.ErrorType
 import com.hanyeop.domain.utils.RemoteErrorEmitter
-import com.pss.domain.utils.ErrorType
-import com.pss.domain.utils.RemoteErrorEmitter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
