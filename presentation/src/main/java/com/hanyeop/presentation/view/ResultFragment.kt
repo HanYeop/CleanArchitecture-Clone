@@ -1,5 +1,6 @@
 package com.hanyeop.presentation.view
 
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
@@ -8,6 +9,7 @@ import com.hanyeop.presentation.databinding.FragmentResultBinding
 import com.hanyeop.presentation.viewmodel.MainViewModel
 import com.pss.presentation.base.BaseFragment
 
+const val TAG = "ResultFragment"
 class ResultFragment : BaseFragment<FragmentResultBinding>(R.layout.fragment_result) {
     private val mainViewModel by activityViewModels<MainViewModel>()
 
@@ -18,6 +20,7 @@ class ResultFragment : BaseFragment<FragmentResultBinding>(R.layout.fragment_res
 
     private fun initResult() {
         binding.percentage.text = mainViewModel.apiCallResult.percentage.toString()
+        saveStatistics() // test
         when (mainViewModel.apiCallResult.percentage) {
             in 0..20 -> setLoveMsgTxt("조금 힘들어보여요")
             in 21..40 -> setLoveMsgTxt("노력해 보세요")
@@ -31,6 +34,33 @@ class ResultFragment : BaseFragment<FragmentResultBinding>(R.layout.fragment_res
         }
         binding.backMainBtn.isEnabled = true
     }
+
+    private fun saveStatistics() {
+        mainViewModel.getStatistics()
+            .addOnSuccessListener {
+                Log.d(TAG, "saveStatistics: $it")
+
+                // db에 이미 존재
+                if (it.value != null) {
+                    mainViewModel.setStatistics(it.value.toString().toInt() + 1)
+                        .addOnFailureListener {
+                            error()
+                        }
+                }
+                // db에 존재 X (최초 생성)
+                else{
+                    mainViewModel.setStatistics(1)
+                        .addOnFailureListener {
+                            error()
+                        }
+                }
+            }
+            .addOnFailureListener {
+                error()
+            }
+    }
+
+    private fun error() = shortShowToast("통계를 저장하는데 오류가 발생했습니다")
 
     private fun setLoveMsgTxt(msg: String) {
         binding.loveTxt.text = msg
