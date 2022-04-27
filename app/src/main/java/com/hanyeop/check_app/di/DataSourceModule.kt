@@ -11,12 +11,14 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class DataSourceModule {
+object DataSourceModule {
 
     @Provides
+    @Singleton
     fun provideMainDataSource(
         loveCalculatorApi: LoveCalculatorApi,
         firebaseRtdb : FirebaseDatabase,
@@ -30,6 +32,7 @@ class DataSourceModule {
     }
 
     @Provides
+    @Singleton
     fun provideSplashDataSource(
         firebaseRtdb : FirebaseDatabase,
         fireStore : FirebaseFirestore
