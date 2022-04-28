@@ -16,7 +16,7 @@ class WomanNameFragment : BaseFragment<FragmentWomanNameBinding>(R.layout.fragme
     }
 
     fun View.nextBtnClick(){
-        mainViewModel.womanNameResult = binding.editTxt.toString()
+        mainViewModel.womanNameResult = binding.editTxt.text.toString()
         this.findNavController().navigate(R.id.action_womanNameFragment_to_manNameFragment)
     }
 }

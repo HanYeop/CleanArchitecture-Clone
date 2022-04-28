@@ -4,9 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hanyeop.domain.model.DomainLoveResponse
-import com.hanyeop.domain.usecase.CheckLoveCalculatorUseCase
-import com.hanyeop.domain.usecase.GetStatisticsUseCase
-import com.hanyeop.domain.usecase.SetStatisticsUseCase
+import com.hanyeop.domain.model.DomainScore
+import com.hanyeop.domain.usecase.*
 import com.hanyeop.domain.utils.ErrorType
 import com.hanyeop.domain.utils.RemoteErrorEmitter
 import com.hanyeop.domain.utils.ScreenState
@@ -19,7 +18,9 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val checkLoveCalculatorUseCase: CheckLoveCalculatorUseCase,
     private val getStatisticsUseCase: GetStatisticsUseCase,
-    private val setStatisticsUseCase: SetStatisticsUseCase
+    private val setStatisticsUseCase: SetStatisticsUseCase,
+    private val setScoreUseCase: SetScoreUseCase,
+    private val getScoreUseCase: GetScoreUseCase
 ): ViewModel(), RemoteErrorEmitter{
 
     val apiCallEvent: LiveData<ScreenState> get() = _apiCallEvent
@@ -28,11 +29,15 @@ class MainViewModel @Inject constructor(
     val getStatisticsDisplayEvent: LiveData<Int> get() = _getStatisticsDisplayEvent
     private var _getStatisticsDisplayEvent = SingleLiveEvent<Int>()
 
+    val getScoreEvent: LiveData<Any> get() = _getScoreEvent
+    private var _getScoreEvent = SingleLiveEvent<Any>()
+
     var apiCallResult = DomainLoveResponse("", "", 0, "")
     var apiErrorType = ErrorType.UNKNOWN
     var errorMessage = "none"
     var manNameResult = "manEx"
     var womanNameResult = "womanEx"
+    var scoreList = arrayListOf<DomainScore>()
 
     fun checkLoveCalculator(
         host: String,
@@ -62,6 +67,21 @@ class MainViewModel @Inject constructor(
         .addOnSuccessListener {
             _getStatisticsDisplayEvent.value = it.value.toString().toInt()
         }
+
+    fun getScore() = getScoreUseCase.execute()
+        .addOnSuccessListener { snapshot ->
+            scoreList.clear()
+            for (item in snapshot.documents) {
+                item.toObject(DomainScore::class.java).let {
+                    scoreList.add(it!!)
+                }
+            }
+            _getScoreEvent.call()
+        }
+
+    fun setScore(man: String, woman: String, percentage: Int, date: String) {
+        setScoreUseCase.execute(DomainScore(man, woman, percentage, date))
+    }
 
     override fun onError(msg: String) {
         errorMessage = msg

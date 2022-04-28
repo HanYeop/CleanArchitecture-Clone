@@ -4,8 +4,11 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.QuerySnapshot
 import com.hanyeop.data.remote.api.LoveCalculatorApi
 import com.hanyeop.data.remote.model.DataLoveResponse
+import com.hanyeop.data.remote.model.DataScore
 import com.hanyeop.data.repository.remote.datasource.MainDataSource
 import com.hanyeop.data.utils.base.BaseDataSource
 import com.hanyeop.domain.utils.RemoteErrorEmitter
@@ -37,4 +40,11 @@ class MainDataSourceImpl @Inject constructor(
         return firebaseRtdb.reference.child("statistics").setValue(plusValue)
     }
 
+    override fun getScore(): Task<QuerySnapshot> {
+        return fireStore.collection("score").orderBy("date", Query.Direction.DESCENDING).get()
+    }
+
+    override fun setScore(score: DataScore): Task<Void> {
+        return fireStore.collection("score").document().set(score)
+    }
 }

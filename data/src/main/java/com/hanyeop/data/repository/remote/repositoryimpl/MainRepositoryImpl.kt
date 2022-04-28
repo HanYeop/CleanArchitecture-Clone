@@ -2,9 +2,11 @@ package com.hanyeop.data.repository.remote.repositoryimpl
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DataSnapshot
+import com.google.firebase.firestore.QuerySnapshot
 import com.hanyeop.data.mapper.MainMapper
 import com.hanyeop.data.repository.remote.datasource.MainDataSource
 import com.hanyeop.domain.model.DomainLoveResponse
+import com.hanyeop.domain.model.DomainScore
 import com.hanyeop.domain.repository.MainRepository
 import com.hanyeop.domain.utils.RemoteErrorEmitter
 import javax.inject.Inject
@@ -28,5 +30,13 @@ class MainRepositoryImpl @Inject constructor(
 
     override fun setStatistics(plusValue: Int): Task<Void> {
         return mainDataSource.setStatistics(plusValue)
+    }
+
+    override fun getScore(): Task<QuerySnapshot> {
+        return mainDataSource.getScore()
+    }
+
+    override fun setScore(score: DomainScore): Task<Void> {
+        return mainDataSource.setScore(MainMapper.scoreMapper(score))
     }
 }

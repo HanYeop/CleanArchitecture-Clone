@@ -8,6 +8,8 @@ import com.hanyeop.presentation.R
 import com.hanyeop.presentation.databinding.FragmentResultBinding
 import com.hanyeop.presentation.viewmodel.MainViewModel
 import com.pss.presentation.base.BaseFragment
+import java.text.SimpleDateFormat
+import java.util.*
 
 const val TAG = "ResultFragment"
 class ResultFragment : BaseFragment<FragmentResultBinding>(R.layout.fragment_result) {
@@ -16,11 +18,20 @@ class ResultFragment : BaseFragment<FragmentResultBinding>(R.layout.fragment_res
     override fun init() {
         binding.fragment = this
         initResult()
+        saveScore()
     }
+
+    private fun saveScore() = with(mainViewModel.apiCallResult){
+        mainViewModel.setScore(this.sname, this.fname, this.percentage, nowTime())
+    }
+
+    private fun nowTime(): String = SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분", Locale("ko", "KR")).format(
+        Date(System.currentTimeMillis())
+    )
 
     private fun initResult() {
         binding.percentage.text = mainViewModel.apiCallResult.percentage.toString()
-        saveStatistics() // test
+//        saveStatistics() // test
         when (mainViewModel.apiCallResult.percentage) {
             in 0..20 -> setLoveMsgTxt("조금 힘들어보여요")
             in 21..40 -> setLoveMsgTxt("노력해 보세요")
@@ -28,6 +39,7 @@ class ResultFragment : BaseFragment<FragmentResultBinding>(R.layout.fragment_res
             in 71..90 -> setLoveMsgTxt("일단 축하드려요")
             in 91..99 -> setLoveMsgTxt("와우.. 눈을 의심하고 있어요")
             100 -> {
+                saveStatistics()
                 setLoveMsgTxt("완벽하네요, 축하드려요")
             }
             else -> setLoveMsgTxt("알수없는 힘!!")

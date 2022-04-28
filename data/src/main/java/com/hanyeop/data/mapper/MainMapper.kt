@@ -1,7 +1,9 @@
 package com.hanyeop.data.mapper
 
 import com.hanyeop.data.remote.model.DataLoveResponse
+import com.hanyeop.data.remote.model.DataScore
 import com.hanyeop.domain.model.DomainLoveResponse
+import com.hanyeop.domain.model.DomainScore
 
 
 object MainMapper {
@@ -16,5 +18,16 @@ object MainMapper {
                 sname = dataResponse.sname
             )
         } else dataResponse
+    }
+
+    fun scoreMapper(
+        domainResponse : DomainScore
+    ) : DataScore {
+        return DataScore(
+            man = domainResponse.man,
+            woman = domainResponse.woman,
+            percentage = domainResponse.percentage,
+            date = domainResponse.date
+        )
     }
 }
