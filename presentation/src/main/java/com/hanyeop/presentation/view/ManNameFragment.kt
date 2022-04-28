@@ -6,11 +6,11 @@ import androidx.navigation.fragment.findNavController
 import com.hanyeop.domain.utils.ErrorType
 import com.hanyeop.domain.utils.ScreenState
 import com.hanyeop.presentation.R
+import com.hanyeop.presentation.base.BaseFragment
 import com.hanyeop.presentation.databinding.FragmentManNameBinding
 import com.hanyeop.presentation.viewmodel.MainViewModel
 import com.hanyeop.presentation.widget.utils.HOST
 import com.hanyeop.presentation.widget.utils.KEY
-import com.pss.presentation.base.BaseFragment
 
 class ManNameFragment : BaseFragment<FragmentManNameBinding>(R.layout.fragment_man_name) {
     private val mainViewModel by activityViewModels<MainViewModel>()

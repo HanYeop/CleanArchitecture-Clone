@@ -5,11 +5,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.hanyeop.presentation.R
 import com.hanyeop.presentation.adapter.ScoreRecyclerViewAdapter
+import com.hanyeop.presentation.base.BaseFragment
 import com.hanyeop.presentation.databinding.FragmentMainBinding
 import com.hanyeop.presentation.viewmodel.MainViewModel
 import com.hanyeop.presentation.widget.extension.showVertical
 import com.pss.library.CountNumberEvent
-import com.pss.presentation.base.BaseFragment
 
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     private val mainViewModel by activityViewModels<MainViewModel>()

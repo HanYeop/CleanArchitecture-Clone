@@ -3,11 +3,10 @@ package com.hanyeop.presentation.view
 import android.util.Log
 import androidx.activity.viewModels
 import com.hanyeop.presentation.R
+import com.hanyeop.presentation.base.BaseActivity
 import com.hanyeop.presentation.databinding.ActivitySplashBinding
 import com.hanyeop.presentation.viewmodel.SplashViewModel
 import com.hanyeop.presentation.widget.extension.startActivityWithFinish
-import com.pss.barlibrary.CustomBar
-import com.pss.presentation.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

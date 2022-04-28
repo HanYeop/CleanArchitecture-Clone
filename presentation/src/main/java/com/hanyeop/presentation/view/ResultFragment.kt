@@ -5,9 +5,9 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.hanyeop.presentation.R
+import com.hanyeop.presentation.base.BaseFragment
 import com.hanyeop.presentation.databinding.FragmentResultBinding
 import com.hanyeop.presentation.viewmodel.MainViewModel
-import com.pss.presentation.base.BaseFragment
 import java.text.SimpleDateFormat
 import java.util.*
 

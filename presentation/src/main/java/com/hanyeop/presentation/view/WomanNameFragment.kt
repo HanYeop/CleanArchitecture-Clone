@@ -4,9 +4,9 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.hanyeop.presentation.R
+import com.hanyeop.presentation.base.BaseFragment
 import com.hanyeop.presentation.databinding.FragmentWomanNameBinding
 import com.hanyeop.presentation.viewmodel.MainViewModel
-import com.pss.presentation.base.BaseFragment
 
 class WomanNameFragment : BaseFragment<FragmentWomanNameBinding>(R.layout.fragment_woman_name) {
     private val mainViewModel by activityViewModels<MainViewModel>()
