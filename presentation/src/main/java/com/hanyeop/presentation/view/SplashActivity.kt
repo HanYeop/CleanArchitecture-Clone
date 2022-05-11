@@ -7,6 +7,7 @@ import com.hanyeop.presentation.base.BaseActivity
 import com.hanyeop.presentation.databinding.ActivitySplashBinding
 import com.hanyeop.presentation.viewmodel.SplashViewModel
 import com.hanyeop.presentation.widget.extension.startActivityWithFinish
+import com.pss.barlibrary.CustomBar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,7 +16,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     private val appVersion = "1.0.0"
 
     override fun init() {
-//        CustomBar.setTransparentBar(this)
+        CustomBar.setTransparentBar(this)
         splashViewModel.checkAppVersion()
             .addOnSuccessListener {
                 Log.d("로그","App version : ${it.value}")
