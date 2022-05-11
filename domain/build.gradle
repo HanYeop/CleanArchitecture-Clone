@@ -42,14 +42,14 @@ dependencies {
     implementation 'com.google.firebase:firebase-database-ktx:20.0.3'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.0.1'
 
-    // Retrofit
-    implementation (Retrofit.RETROFIT)
-    implementation (Retrofit.CONVERTER_GSON)
-    implementation (Retrofit.CONVERTER_JAXB)
-
-    //okHttp
-    implementation (OkHttp.OKHTTP)
-    implementation (OkHttp.LOGGING_INTERCEPTOR)
+//    // Retrofit
+//    implementation (Retrofit.RETROFIT)
+//    implementation (Retrofit.CONVERTER_GSON)
+//    implementation (Retrofit.CONVERTER_JAXB)
+//
+//    //okHttp
+//    implementation (OkHttp.OKHTTP)
+//    implementation (OkHttp.LOGGING_INTERCEPTOR)
 
     // dager hilt
     implementation (DaggerHilt.DAGGER_HILT)
